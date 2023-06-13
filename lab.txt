@@ -1,0 +1,97 @@
+FEATURES
+users can sign into the app with their email and password
+users can create recipes with ingredients and instructions
+recipes can be marked as public or private
+users can view other people's recipes
+ingredients from recipes can be added to user's grocery lists
+users can create their own occasions and assign recipes to occasions
+
+BRAINSTORM
+    email, password, userName
+    user => recipes, ingredients, instruction text, occasions
+    recipes => ingredients, instruction text, public recipe, private recipe
+    grocery lists => ingredients 
+    occasions => recipes 
+
+TABLE IDEAS
+    users
+    recipes
+    ingredients
+    grocery lists
+    occasions
+
+RELATIONSHIPS
+    One-to-One
+        Grocery Lists - One user has one grocery list
+        Occasions - One user has access to their occasion
+    One-to-Many
+        Users - One user has access to many recipes, ingredients, etc.
+    Many-to-Many
+        Recipes - Many recipes require many ingredients
+        Ingredients - Many ingredients go to many recipes
+
+COLUMNS
+Users
+    Users need to have an account so they can view and share recipes.
+
+Recipes
+    Need to have content to be able to view and share.
+
+Ingredients
+    Need to be able to see how to make the recipes you are viewing.
+
+Grocery Lists
+    Users need to be able to save their ingredients somewhere so they know what to buy.
+
+Occasions
+    Users can have the option to view or share their recipes for special occasions.
+
+
+-- CREATE TABLE users (
+-- 	user_id SERIAL PRIMARY KEY,
+--   email VARCHAR(255) NOT NULL,
+--   password VARCHAR(255) NOT NULL,
+--   user_name VARCHAR(255) NOT NULL
+-- );
+
+-- CREATE TABLE recipes (
+-- 	recipe_id SERIAL PRIMARY KEY,
+--   user_id INTEGER NOT NULL REFERENCES users(user_id),
+--   instructions VARCHAR(255) NOT NULL,
+--   title VARCHAR(255) NOT NULL,
+--   is_public BOOLEAN NOT NULL
+-- );
+
+-- CREATE TABLE ingredients (
+-- 	ingredient_id SERIAL PRIMARY KEY,
+--   ingredient_name VARCHAR(255) NOT NULL
+-- );
+
+-- CREATE TABLE recipes_ingredients (
+-- 	recipe_ingredient_id SERIAL PRIMARY KEY,
+--   recipe_id INTEGER NOT NULL REFERENCES recipes(recipe_id),
+--   ingredient_id INTEGER NOT NULL REFERENCES ingredients(ingredient_id)
+-- );
+
+-- CREATE TABLE grocery_lists (
+-- 	grocery_list_id SERIAL PRIMARY KEY,
+--   user_id INTEGER NOT NULL REFERENCES users(user_id)
+-- );
+
+-- CREATE TABLE grocery_ingredients (
+-- 	grocery_ingredient_id SERIAL PRIMARY KEY,
+--   ingredient_id INTEGER NOT NULL REFERENCES ingredients(ingredient_id),
+--   grocery_list_id INTEGER NOT NULL REFERENCES grocery_lists(grocery_list_id)
+-- );
+
+-- CREATE TABLE occasions (
+-- 	occasion_id SERIAL PRIMARY KEY,
+--   user_id INTEGER NOT NULL REFERENCES users(user_id),
+--   function VARCHAR(255) NOT NULL
+-- );
+
+-- CREATE TABLE occasions_recipes (
+-- 	occasion_recipe_id SERIAL PRIMARY KEY,
+--   occasion_id INTEGER NOT NULL REFERENCES occasions(occasion_id),
+--   recipe_id INTEGER NOT NULL REFERENCES recipes(recipe_id)
+-- );
